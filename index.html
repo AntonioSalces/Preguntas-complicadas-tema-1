@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de 60 Preguntas</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de 60 Preguntas</h1>
+
+    <form id="quizForm">
+        <div id="questions"></div>
+        <button type="button" onclick="showResults()">Comprobar</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        const questions = [
+            { question: "¿Cuál es la diferencia principal entre la empresa clásica y la empresa actual?", answers: ["La empresa clásica busca el lucro y la empresa actual busca el desarrollo social", "La empresa clásica se centra en la producción, mientras que la actual se enfoca en la organización", "La empresa clásica solo produce para el mercado, mientras que la actual incluye la dimensión moral"], correctAnswer: 1, justification: "La empresa clásica se enfoca en la producción, mientras que la empresa moderna tiene una estructura organizativa más compleja." },
+            { question: "¿Qué concepto describe mejor la función de la empresa según Fernández Pirla?", answers: ["La empresa como un centro de producción que agrega valor", "La empresa como una unidad de consumo que produce bienes", "La empresa como un elemento económico aislado"], correctAnswer: 0, justification: "Fernández Pirla ve la empresa como una unidad económica de producción cuya función es agregar valor a los bienes." },
+            { question: "En la perspectiva histórica, ¿qué factores influenciaron la evolución de la empresa?", answers: ["El mercado internacional", "Los cambios tecnológicos y sociales", "Las políticas gubernamentales y económicas"], correctAnswer: 1, justification: "Los avances tecnológicos y sociales han sido fundamentales para la evolución de la estructura y funciones de las empresas." },
+            { question: "Según la teoría de sistemas, ¿cuál de los siguientes es un subsistema dentro de la empresa?", answers: ["El mercado laboral", "El subsistema de recursos humanos", "El poder adquisitivo de los consumidores"], correctAnswer: 1, justification: "El subsistema de recursos humanos es una parte clave de la estructura organizativa de una empresa." },
+            { question: "¿Qué caracteriza a una empresa según el modelo sistémico?", answers: ["Que sus elementos están aislados pero funcionan de manera independiente", "Que sus elementos están interrelacionados y buscan un objetivo común", "Que su estructura es jerárquica y no incluye subsistemas"], correctAnswer: 1, justification: "En un modelo sistémico, los diferentes elementos de la empresa están interrelacionados para alcanzar objetivos comunes." },
+            { question: "¿Cuál de los siguientes es un elemento inmaterial que constituye la empresa?", answers: ["El capital financiero", "La cultura empresarial", "La maquinaria"], correctAnswer: 1, justification: "La cultura empresarial, que involucra valores, creencias y motivaciones compartidas, es un elemento inmaterial de la empresa." },
+            { question: "¿Qué tipo de riesgo enfrenta principalmente una empresa?", answers: ["Riesgo ético", "Riesgo económico, técnico y moral", "Riesgo operacional"], correctAnswer: 1, justification: "Las empresas enfrentan riesgos económicos, técnicos y morales que deben gestionar adecuadamente." },
+            { question: "En el entorno empresarial, ¿qué representa la dimensión tecnológica?", answers: ["El análisis de las necesidades del mercado", "El avance de la ciencia y la tecnología que afecta a la industria", "El nivel de competencias dentro de la empresa"], correctAnswer: 1, justification: "La dimensión tecnológica incluye avances científicos y tecnológicos que afectan a la producción y a las industrias." },
+            { question: "¿Qué elemento describe mejor el concepto de empresario?", answers: ["Un líder que toma decisiones estratégicas y asume responsabilidades", "Un trabajador autónomo que busca beneficios inmediatos", "Un inversionista que sólo maneja recursos financieros"], correctAnswer: 0, justification: "El empresario toma decisiones estratégicas y asume la responsabilidad comercial y legal frente a terceros." },
+            { question: "Según el modelo sistémico, ¿cómo se interrelacionan los subsistemas en la empresa?", answers: ["Son independientes y funcionan por separado", "Están interrelacionados y dependen unos de otros", "Cada subsistema tiene su propio sistema sin interferir con los demás"], correctAnswer: 1, justification: "En el modelo sistémico, todos los subsistemas están interrelacionados y dependen unos de otros para cumplir con los objetivos organizacionales." },
+            { question: "¿Qué dimensión del entorno empresarial afecta la competitividad dentro de un mercado?", answers: ["La dimensión económica", "La dimensión sociocultural", "La dimensión tecnológica"], correctAnswer: 0, justification: "La dimensión económica afecta directamente la competitividad en un mercado, ya que está relacionada con el poder adquisitivo, las tasas de interés y la tasa de desempleo." },
+            { question: "¿Cuál de los siguientes subsistemas está relacionado con la captación de recursos financieros?", answers: ["Subsistema de producción", "Subsistema de marketing", "Subsistema de financiación"], correctAnswer: 2, justification: "El subsistema de financiación se encarga de captar los recursos financieros necesarios para el funcionamiento de la empresa." },
+            { question: "¿Qué caracteriza a una empresa con enfoque sistémico?", answers: ["Que sus funciones están aisladas y son independientes", "Que sus funciones están interconectadas y se supervisan a nivel estratégico", "Que la producción es el único subsistema relevante"], correctAnswer: 1, justification: "Una empresa con enfoque sistémico tiene funciones interrelacionadas que deben ser supervisadas y gestionadas estratégicamente." },
+            { question: "¿Cuál es la responsabilidad del subsistema de marketing dentro de la empresa?", answers: ["Gestionar los recursos humanos", "Realizar análisis financieros", "Identificar las necesidades del mercado y distribuir productos"], correctAnswer: 2, justification: "El subsistema de marketing se encarga de identificar las necesidades del mercado, realizar investigaciones y distribuir los productos o servicios de la empresa." },
+            { question: "Según la teoría de sistemas, ¿qué función tiene el subsistema de producción?", answers: ["Desarrollar y distribuir productos", "Adquirir insumos necesarios para la producción", "Transformar insumos en productos o servicios"], correctAnswer: 2, justification: "El subsistema de producción se ocupa de transformar los insumos en productos o servicios para satisfacer las necesidades del mercado." },
+            { question: "¿Cuál es la principal característica del ciclo de administración de una empresa?", answers: ["Planificación, ejecución y evaluación de actividades", "Solo ejecución de actividades", "Evaluación del comportamiento de los empleados"], correctAnswer: 0, justification: "El ciclo de administración incluye la planificación, ejecución y evaluación de actividades para asegurar el cumplimiento de los objetivos organizacionales." },
+            { question: "En el contexto de la empresa, ¿qué significa el concepto de 'incertidumbre empresarial'?", answers: ["La falta de previsión en el entorno empresarial", "La capacidad de adaptarse rápidamente a cambios", "La presencia de competencia fuerte"], correctAnswer: 0, justification: "La incertidumbre empresarial se refiere a la falta de información suficiente sobre factores externos, lo que dificulta la previsión y toma de decisiones." },
+            { question: "En términos de la empresa como sistema, ¿qué subsistema es el responsable de asignar los recursos humanos?", answers: ["Subsistema de recursos humanos", "Subsistema de operaciones", "Subsistema de marketing"], correctAnswer: 0, justification: "El subsistema de recursos humanos se encarga de la captación, asignación y gestión del personal dentro de la empresa." }
+        ];
+
+        function renderQuestions() {
+            const questionContainer = document.getElementById("questions");
+            questions.forEach((question, index) => {
+                const questionElement = document.createElement("div");
+                questionElement.classList.add("question");
+
+                const questionText = document.createElement("p");
+                questionText.innerText = `${index + 1}. ${question.question}`;
+                questionElement.appendChild(questionText);
+
+                question.answers.forEach((answer, i) => {
+                    const label = document.createElement("label");
+                    label.innerHTML = `
+                        <input type="radio" name="q${index}" value="${i}" onclick="checkAnswer(${index}, ${i})">
+                        ${answer}
+                    `;
+                    questionElement.appendChild(label);
+                    questionElement.appendChild(document.createElement("br"));
+                });
+
+                questionElement.appendChild(document.createElement("div"));
+                questionContainer.appendChild(questionElement);
+            });
+        }
+
+        function checkAnswer(questionIndex, selectedValue) {
+            const question = questions[questionIndex];
+            const responseElement = document.createElement("div");
+            const questionElement = document.getElementsByClassName("question")[questionIndex];
+            
+            const feedback = questionElement.getElementsByTagName("div")[0];
+            feedback.innerHTML = ""; // Limpiar feedback anterior
+
+            if (selectedValue === question.correctAnswer) {
+                feedback.classList.add("correct");
+                feedback.innerText = `Correcto: ${question.justification}`;
+            } else {
+                feedback.classList.add("incorrect");
+                feedback.innerText = `Incorrecto. ${question.justification}`;
+            }
+        }
+
+        function showResults() {
+            let score = 0;
+            questions.forEach((question, index) => {
+                const selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selectedAnswer !== null) {
+                    const answerValue = parseInt(selectedAnswer.value);
+                    if (answerValue === question.correctAnswer) {
+                        score += 0.5;
+                    }
+                }
+            });
+
+            const totalScore = document.createElement("p");
+            totalScore.innerText = `Nota final: ${score.toFixed(2)} / 10`;
+            const button = document.createElement("button");
+            button.classList.add("btn");
+            button.innerText = "Corregir";
+            button.onclick = () => location.reload();
+            document.getElementById("result").appendChild(totalScore);
+            document.getElementById("result").appendChild(button);
+        }
+
+        renderQuestions();
+    </script>
+</body>
+</html>
