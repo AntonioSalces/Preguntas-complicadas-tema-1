@@ -3,43 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de 60 Preguntas</title>
+    <title>Test de 20 Preguntas</title>
     <style>
-        * {
-            font-family: sans-serif;
+        body {
+            font-family: 'Comic Sans MS';
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #quizForm {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .question p {
+            font-size: 1.2em;
+            color: #444;
+        }
+        .question label {
+            display: block;
+            padding: 8px 0;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+        .question input[type="radio"] {
+            margin-right: 10px;
+        }
+        .correct {
+            color: #28a745;
+        }
+        .incorrect {
+            color: #dc3545;
+        }
+        .response {
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .correct, .incorrect {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        #result button {
+            background-color: #28a745;
+            border-radius: 5px;
+            font-size: 1.1em;
+            margin-top: 15px;
+        }
+        #result button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <h1>Test de 60 Preguntas</h1>
+    <h1>Test de 20 Preguntas</h1>
 
     <form id="quizForm">
         <div id="questions"></div>
-        <button type="button" onclick="showResults()">Comprobar</button>
+        <button type="button" class="btn" onclick="showResults()">Comprobar</button>
     </form>
 
     <div id="result"></div>
 
     <script>
         const questions = [
-            { question: "¿Cuál es la diferencia principal entre la empresa clásica y la empresa actual?", answers: ["La empresa clásica busca el lucro y la empresa actual busca el desarrollo social", "La empresa clásica se centra en la producción, mientras que la actual se enfoca en la organización", "La empresa clásica solo produce para el mercado, mientras que la actual incluye la dimensión moral"], correctAnswer: 1, justification: "La empresa clásica se enfoca en la producción, mientras que la empresa moderna tiene una estructura organizativa más compleja." },
-            { question: "¿Qué concepto describe mejor la función de la empresa según Fernández Pirla?", answers: ["La empresa como un centro de producción que agrega valor", "La empresa como una unidad de consumo que produce bienes", "La empresa como un elemento económico aislado"], correctAnswer: 0, justification: "Fernández Pirla ve la empresa como una unidad económica de producción cuya función es agregar valor a los bienes." },
-            { question: "En la perspectiva histórica, ¿qué factores influenciaron la evolución de la empresa?", answers: ["El mercado internacional", "Los cambios tecnológicos y sociales", "Las políticas gubernamentales y económicas"], correctAnswer: 1, justification: "Los avances tecnológicos y sociales han sido fundamentales para la evolución de la estructura y funciones de las empresas." },
-            { question: "Según la teoría de sistemas, ¿cuál de los siguientes es un subsistema dentro de la empresa?", answers: ["El mercado laboral", "El subsistema de recursos humanos", "El poder adquisitivo de los consumidores"], correctAnswer: 1, justification: "El subsistema de recursos humanos es una parte clave de la estructura organizativa de una empresa." },
-            { question: "¿Qué caracteriza a una empresa según el modelo sistémico?", answers: ["Que sus elementos están aislados pero funcionan de manera independiente", "Que sus elementos están interrelacionados y buscan un objetivo común", "Que su estructura es jerárquica y no incluye subsistemas"], correctAnswer: 1, justification: "En un modelo sistémico, los diferentes elementos de la empresa están interrelacionados para alcanzar objetivos comunes." },
-            { question: "¿Cuál de los siguientes es un elemento inmaterial que constituye la empresa?", answers: ["El capital financiero", "La cultura empresarial", "La maquinaria"], correctAnswer: 1, justification: "La cultura empresarial, que involucra valores, creencias y motivaciones compartidas, es un elemento inmaterial de la empresa." },
-            { question: "¿Qué tipo de riesgo enfrenta principalmente una empresa?", answers: ["Riesgo ético", "Riesgo económico, técnico y moral", "Riesgo operacional"], correctAnswer: 1, justification: "Las empresas enfrentan riesgos económicos, técnicos y morales que deben gestionar adecuadamente." },
-            { question: "En el entorno empresarial, ¿qué representa la dimensión tecnológica?", answers: ["El análisis de las necesidades del mercado", "El avance de la ciencia y la tecnología que afecta a la industria", "El nivel de competencias dentro de la empresa"], correctAnswer: 1, justification: "La dimensión tecnológica incluye avances científicos y tecnológicos que afectan a la producción y a las industrias." },
-            { question: "¿Qué elemento describe mejor el concepto de empresario?", answers: ["Un líder que toma decisiones estratégicas y asume responsabilidades", "Un trabajador autónomo que busca beneficios inmediatos", "Un inversionista que sólo maneja recursos financieros"], correctAnswer: 0, justification: "El empresario toma decisiones estratégicas y asume la responsabilidad comercial y legal frente a terceros." },
-            { question: "Según el modelo sistémico, ¿cómo se interrelacionan los subsistemas en la empresa?", answers: ["Son independientes y funcionan por separado", "Están interrelacionados y dependen unos de otros", "Cada subsistema tiene su propio sistema sin interferir con los demás"], correctAnswer: 1, justification: "En el modelo sistémico, todos los subsistemas están interrelacionados y dependen unos de otros para cumplir con los objetivos organizacionales." },
-            { question: "¿Qué dimensión del entorno empresarial afecta la competitividad dentro de un mercado?", answers: ["La dimensión económica", "La dimensión sociocultural", "La dimensión tecnológica"], correctAnswer: 0, justification: "La dimensión económica afecta directamente la competitividad en un mercado, ya que está relacionada con el poder adquisitivo, las tasas de interés y la tasa de desempleo." },
-            { question: "¿Cuál de los siguientes subsistemas está relacionado con la captación de recursos financieros?", answers: ["Subsistema de producción", "Subsistema de marketing", "Subsistema de financiación"], correctAnswer: 2, justification: "El subsistema de financiación se encarga de captar los recursos financieros necesarios para el funcionamiento de la empresa." },
-            { question: "¿Qué caracteriza a una empresa con enfoque sistémico?", answers: ["Que sus funciones están aisladas y son independientes", "Que sus funciones están interconectadas y se supervisan a nivel estratégico", "Que la producción es el único subsistema relevante"], correctAnswer: 1, justification: "Una empresa con enfoque sistémico tiene funciones interrelacionadas que deben ser supervisadas y gestionadas estratégicamente." },
-            { question: "¿Cuál es la responsabilidad del subsistema de marketing dentro de la empresa?", answers: ["Gestionar los recursos humanos", "Realizar análisis financieros", "Identificar las necesidades del mercado y distribuir productos"], correctAnswer: 2, justification: "El subsistema de marketing se encarga de identificar las necesidades del mercado, realizar investigaciones y distribuir los productos o servicios de la empresa." },
-            { question: "Según la teoría de sistemas, ¿qué función tiene el subsistema de producción?", answers: ["Desarrollar y distribuir productos", "Adquirir insumos necesarios para la producción", "Transformar insumos en productos o servicios"], correctAnswer: 2, justification: "El subsistema de producción se ocupa de transformar los insumos en productos o servicios para satisfacer las necesidades del mercado." },
-            { question: "¿Cuál es la principal característica del ciclo de administración de una empresa?", answers: ["Planificación, ejecución y evaluación de actividades", "Solo ejecución de actividades", "Evaluación del comportamiento de los empleados"], correctAnswer: 0, justification: "El ciclo de administración incluye la planificación, ejecución y evaluación de actividades para asegurar el cumplimiento de los objetivos organizacionales." },
-            { question: "En el contexto de la empresa, ¿qué significa el concepto de 'incertidumbre empresarial'?", answers: ["La falta de previsión en el entorno empresarial", "La capacidad de adaptarse rápidamente a cambios", "La presencia de competencia fuerte"], correctAnswer: 0, justification: "La incertidumbre empresarial se refiere a la falta de información suficiente sobre factores externos, lo que dificulta la previsión y toma de decisiones." },
-            { question: "En términos de la empresa como sistema, ¿qué subsistema es el responsable de asignar los recursos humanos?", answers: ["Subsistema de recursos humanos", "Subsistema de operaciones", "Subsistema de marketing"], correctAnswer: 0, justification: "El subsistema de recursos humanos se encarga de la captación, asignación y gestión del personal dentro de la empresa." }
+            { question: "¿Qué es la empresa según la definición clásica?", answers: ["Una unidad de consumo", "Una unidad económica de producción", "Una unidad de distribución"], correctAnswer: 1, justification: "La empresa es una unidad económica de producción en contraposición con la unidad económica de consumo." },
+            { question: "¿Cuál es la función básica de una empresa?", answers: ["Generar lucro", "Transformación de factores en productos", "Distribuir productos"], correctAnswer: 1, justification: "La función básica de la empresa es transformar los factores de producción en productos." },
+            { question: "Según la perspectiva histórica, ¿qué concepto se debe distinguir de la empresa?", answers: ["El concepto de organización", "El concepto de economía", "El concepto de unidad de consumo"], correctAnswer: 2, justification: "La empresa se debe distinguir del concepto de unidad de consumo, ya que la empresa está enfocada en la producción y distribución." },
+            { question: "¿Qué tipo de riesgo asume una empresa?", answers: ["Riesgo económico", "Riesgo legal", "Riesgo tecnológico"], correctAnswer: 0, justification: "La empresa asume riesgos económicos, técnicos y morales." },
+            { question: "¿Qué elementos constituyen una empresa?", answers: ["Elementos humanos, materiales e inmateriales", "Elementos legales y financieros", "Elementos técnicos y económicos"], correctAnswer: 0, justification: "Una empresa se compone de elementos humanos (empleados, directivos), materiales (bienes duraderos y no duraderos), e inmateriales (cultura, organización)." },
+            { question: "¿Qué se entiende por 'empresa como sistema'?", answers: ["Un conjunto de partes interrelacionadas para cumplir un objetivo común", "Una serie de procesos financieros independientes", "Una unidad jurídica autónoma"], correctAnswer: 0, justification: "La empresa se considera un sistema en el que diferentes subsistemas interaccionan para cumplir los objetivos organizacionales." },
+            { question: "¿Cuál de estos no es un subsistema dentro de la empresa?", answers: ["Recursos humanos", "Marketing", "Contabilidad financiera"], correctAnswer: 2, justification: "Contabilidad financiera no se considera un subsistema dentro de la estructura empresarial, mientras que recursos humanos y marketing son esenciales." },
+            { question: "¿Qué decisiones toma un empresario?", answers: ["Estrategias de marketing", "Decisiones estratégicas", "Decisiones operativas diarias"], correctAnswer: 1, justification: "El empresario toma decisiones estratégicas sobre los objetivos a largo plazo y la administración general de la empresa." },
+            { question: "¿Qué describe mejor el entorno empresarial?", answers: ["El mercado laboral y la competencia", "Los productos que se venden", "Las estrategias de marketing de una empresa"], correctAnswer: 0, justification: "El entorno empresarial abarca factores como el mercado laboral, los clientes, competidores y proveedores." },
+            { question: "¿Qué dimensión del entorno empresarial incluye los avances científicos y tecnológicos?", answers: ["Dimensión tecnológica", "Dimensión jurídica", "Dimensión económica"], correctAnswer: 0, justification: "La dimensión tecnológica abarca los avances científicos y tecnológicos que afectan a la empresa." },
+            { question: "¿Cuál es una de las características del emprendedor?", answers: ["No toma riesgos", "Es innovador", "Prefiere trabajar solo"], correctAnswer: 1, justification: "El emprendedor se caracteriza por su capacidad de innovación y por tomar riesgos calculados." },
+            { question: "¿Qué se considera la cultura empresarial?", answers: ["La estructura jerárquica", "El conjunto de valores y creencias compartidas", "El número de empleados"], correctAnswer: 1, justification: "La cultura empresarial se refiere al conjunto de valores, creencias y motivaciones que guían el comportamiento dentro de la empresa." },
+            { question: "¿Cómo se define el empresario?", answers: ["Una persona que invierte dinero en una empresa", "Una persona que toma decisiones estratégicas y asume responsabilidades", "Una persona encargada de la producción"], correctAnswer: 1, justification: "El empresario es la persona que toma decisiones estratégicas y asume la responsabilidad legal y comercial de la empresa." },
+            { question: "¿Qué es un subsistema en la empresa?", answers: ["Una parte de la empresa que opera de forma independiente", "Un conjunto de elementos relacionados para cumplir una función", "Un grupo de empleados que trabajan juntos"], correctAnswer: 1, justification: "Un subsistema dentro de la empresa es un conjunto de elementos organizados que trabajan juntos para cumplir una función específica." },
+            { question: "¿Qué subsistema se encarga de la captación de recursos humanos?", answers: ["Subsistema de marketing", "Subsistema de recursos humanos", "Subsistema de finanzas"], correctAnswer: 1, justification: "El subsistema de recursos humanos se encarga de la captación, selección, formación y desarrollo de los empleados." },
+            { question: "¿Qué se considera un elemento material duradero en una empresa?", answers: ["El conocimiento", "La infraestructura física", "Los bienes de consumo"], correctAnswer: 1, justification: "Los elementos materiales duraderos son la infraestructura física, como edificios, maquinaria y equipos." },
+            { question: "¿Qué dimensión del entorno empresarial afecta directamente al poder adquisitivo de los consumidores?", answers: ["Dimensión sociocultural", "Dimensión económica", "Dimensión internacional"], correctAnswer: 1, justification: "La dimensión económica se refiere a factores como el poder adquisitivo, la tasa de desempleo y las tasas de interés, que afectan a las decisiones de consumo." },
+            { question: "¿Qué hace un emprendedor cuando inicia una empresa?", answers: ["Busca una idea viable y la lleva a cabo", "Compra una empresa ya existente", "Invierte en bienes raíces"], correctAnswer: 0, justification: "El emprendedor identifica una oportunidad de negocio, organiza los recursos necesarios y asume los riesgos para llevarla a cabo." },
+            { question: "¿Qué se entiende por ‘riesgo moral’ en una empresa?", answers: ["El riesgo asociado a la salud de los empleados", "El riesgo derivado de las malas decisiones éticas o legales", "El riesgo financiero de una inversión"], correctAnswer: 1, justification: "El riesgo moral se refiere a los riesgos derivados de decisiones éticas o legales incorrectas dentro de la empresa." },
+            { question: "¿Cuál es la principal característica de una empresa como sistema, según el modelo sistémico?", answers: ["Cada subsistema tiene una función independiente sin interacción con otros", "El sistema es indivisible funcionalmente y los subsistemas deben interactuar entre sí", "Cada subsistema opera de forma autónoma para maximizar sus objetivos sin tener en cuenta los de los otros subsistemas"], correctAnswer: 1, justification: "Según el modelo sistémico, la empresa es un conjunto de subsistemas interrelacionados que deben trabajar de manera coordinada para alcanzar los objetivos comunes. Aunque cada subsistema tiene funciones específicas, la interacción entre ellos es fundamental para el funcionamiento efectivo de la empresa como un todo." }
         ];
 
         function renderQuestions() {
@@ -92,6 +177,8 @@
                     const answerValue = parseInt(selectedAnswer.value);
                     if (answerValue === question.correctAnswer) {
                         score += 0.5;
+                    } else {
+                        score -= 0.5;
                     }
                 }
             });
